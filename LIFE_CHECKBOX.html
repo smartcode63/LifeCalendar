@@ -1,0 +1,55 @@
+<html>
+<head>
+<style>
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(52, 1fr);
+  background-color: #e6e6e6;
+  padding: 10px;
+}
+
+.desc p {font:16 px Arial}
+.grid-item {
+  background-color: rgba(255, 255, 255, 0.8);
+  border: 1px solid rgba(0, 0, 0, 0.8);
+  padding: 20px;
+  font-size: 30px;
+  text-align: center;
+}
+</style>
+<title>LIFE CHECKBOX</title>
+</head>
+
+<body>
+<div class="desc"><p>Каждая строка в этом календаре составляет один год жизни. </p>
+<p>Каждая клеточка - это неделя. </p>
+<p>Вот сколько недель необходимо чтобы превратиться из новорождённого в 70-летнего старика. Именно так выглядит отпущеное нам время.</p>
+<p>Иногда жизнь кажется очень короткой, иногда невероятно длинной. Этот календарь даёт чёткое представление о продолжительности нашей жизни и о том, что она конечна.</p>
+<p><strong>Ваш текущий возраст:</strong> <input type="text" id='age'> <input type=button value="Заполнить календарь жизни" onClick="rebuildCalendar(document.getElementById('age').value)"></p>
+</div>
+<div class="grid-container" id='life_grid'>
+
+</div>
+
+<script>
+const lifeWeeks = 52*70;
+const lifeGrid = document.getElementById("life_grid");
+
+function rebuildCalendar(curAge)
+{
+	lifeGrid.innerHTML="";
+	for (i=0; i<lifeWeeks; i++)
+	{
+	   let lifeChkbox = document.createElement("input");
+	   lifeChkbox.setAttribute("type", "checkbox");
+	   lifeChkbox.setAttribute("name", "week_"+i);
+	   if (i<52*curAge) lifeChkbox.setAttribute("checked", true);
+	   lifeGrid.appendChild (lifeChkbox); 
+	} 
+}
+
+rebuildCalendar(0);
+</script>
+
+</body>
+
